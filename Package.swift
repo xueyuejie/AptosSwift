@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/mxcl/PromiseKit.git", from: "8.1.1"),
         .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.4.1"),
         .package(url: "https://github.com/lishuailibertine/tweetnacl-swiftwrap", from: "1.0.5"),
-        .package(url: "https://github.com/Flight-School/AnyCodable.git", .exact("0.6.1")),
+        .package(url: "https://github.com/Flight-School/AnyCodable.git", from: "0.6.1"),
         .package(url: "https://github.com/mathwallet/BIP39swift", from: "1.0.1")
     ],
     targets: [
