@@ -32,47 +32,7 @@ extension AptosClient {
         public let authenticationKey: String
     }
     
-    public struct AccountResourceData: Decodable {
-        public struct Guid: Decodable {
-            public let id: Id
-            
-            public struct Id: Decodable {
-                public let addr: String
-                public let creationNum: String
-            }
-        }
-        
-        public struct CoinStore: Decodable {
-            public let coin: Coin
-            public let depositEvents: DepositEvents
-            public let withdrawEvents: WithdrawEvents
-            
-            public struct Coin: Decodable {
-                public let value: String
-            }
-            
-            public struct DepositEvents: Decodable {
-                public let counter: String
-                public let guid: Guid
-            }
-            
-            public struct WithdrawEvents: Decodable {
-                public let counter: String
-                public let guid: Guid
-            }
-        }
-        
-        public struct Acccount: Decodable {
-            public let authenticationKey: String
-            public let coinRegisterEvents: CoinRegisterEvents
-            
-            public struct CoinRegisterEvents: Decodable {
-                public let counter: String
-                public let guid: Guid
-                public let sequenceNumber: String
-            }
-        }
-    }
+    public typealias AcountBalance = Int64
     
     public struct AccountResource: Decodable {
         public let type: String

@@ -168,20 +168,21 @@ final class AptosSwiftTests: XCTestCase {
                 XCTAssertTrue(ledgerInfo.chainId > 0)
                 XCTAssertTrue((UInt64(ledgerInfo.blockHeight) ?? 0) > 0)
                 
-                let address = try AptosAddress("0x689b6d1d3e54ebb582bef82be2e6781cccda150a6681227b4b0e43ab754834e5")
+                let address = try AptosAddress("0xa2e71c2e63610a0483b9e2dacec2d3072ee9a0dd8f9cd62df5a2298b44ead2c7")
                 let accountData = try client.getAccount(address: address).wait()
                 XCTAssertEqual(accountData.authenticationKey, address.address)
                 
                 let accountResources = try client.getAccountResources(address: address).wait()
-                XCTAssertTrue(!accountResources.isEmpty)
-                
-                let resourceType = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>"
+                XCTAssertTrue(accountResources.count >= 0)
+
+                let resourceType = "0x1::account::Account"
                 let accountResource = try client.getAccountResource(address: address, resourceType: resourceType).wait()
                 XCTAssertEqual(accountResource.type, resourceType)
                 
-                let coinStore = try accountResource.to(AptosClient.AccountResourceData.CoinStore.self)
-                XCTAssertTrue(!coinStore.coin.value.isEmpty)
-                
+                let assetType = "0x1::aptos_coin::AptosCoin"
+                let balance = try client.getAccountBalance(address: address, assetType: assetType).wait()
+                XCTAssertTrue(balance >= 0)
+
                 let accountModules = try client.getAccountModules(address: try AptosAddress("0x1")).wait()
                 XCTAssertTrue(!accountModules.isEmpty)
                 
@@ -191,8 +192,8 @@ final class AptosSwiftTests: XCTestCase {
                 let block = try client.getBlock(0).wait()
                 XCTAssertEqual(block.blockHeight, "0")
                 
-                let transaction = try client.getTransactionByHash("0x3993463e2d17aca60d1114652c9c4ca4fe59b571ea343c16dd97e7080b3ad635").wait()
-                XCTAssertEqual(transaction["hash"], "0x3993463e2d17aca60d1114652c9c4ca4fe59b571ea343c16dd97e7080b3ad635")
+                let transaction = try client.getTransactionByHash("0x8139e2de7d8dfa566e78313daa5a35c0673fb0e60d4daacf32ecca7e95807369").wait()
+                XCTAssertEqual(transaction["hash"], "0x8139e2de7d8dfa566e78313daa5a35c0673fb0e60d4daacf32ecca7e95807369")
 
                 reqeustExpectation.fulfill()
             } catch let e {

@@ -48,6 +48,15 @@ public class AptosClient: AptosClientBase {
         return GET(path: "/v1/accounts/\(address.address)")
     }
     
+    /// Get balance
+    /// - Parameters:
+    ///   - address: Hex encoded 32 byte Aptos account address
+    ///   - assetType: A hex encoded 32 byte Aptos account address or a struct tag. example: 0x1::aptos_coin::AptosCoin
+    /// - Returns: Balance value
+    public func getAccountBalance(address: AptosAddress, assetType: String) -> Promise<AptosClient.AcountBalance> {
+        return GET(path: "/v1/accounts/\(address.address)/balance/\(assetType)")
+    }
+    
     /// Get account resources
     /// - Parameter address: Hex encoded 32 byte Aptos account address
     /// - Returns: all account resources
