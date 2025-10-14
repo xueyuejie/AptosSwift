@@ -79,6 +79,6 @@ extension AptosMultiEd25519PublicKey: BorshCodable {
         }
         
         self.publicKeys = pubKeys
-        self.threshold = data.bytes.last!
+        self.threshold = data.byteArray.last!
     }
 }

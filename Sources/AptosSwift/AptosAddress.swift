@@ -42,7 +42,7 @@ public struct AptosAddress: CustomStringConvertible {
 
 extension AptosAddress: BorshCodable {
     public func serialize(to writer: inout Data) throws {
-        writer.append(data.bytes, count: Self.SIZE)
+        writer.append(data.byteArray, count: Self.SIZE)
     }
     
     public init(from reader: inout BinaryReader) throws {

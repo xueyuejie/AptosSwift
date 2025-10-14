@@ -41,11 +41,11 @@ public struct AptosKeyPairEd25519 {
         }
         let keyPair = try NaclSign.KeyPair.keyPair(fromSeed: seed)
         self.secretKey = keyPair.secretKey
-        self.address = try AptosAddress(Data(keyPair.publicKey.bytes + [0x00]).sha3(.sha256))
+        self.address = try AptosAddress(Data(keyPair.publicKey.byteArray + [0x00]).sha3(.sha256))
     }
     
     public init(mnemonics: String, path: String = "m/44'/637'/0'/0'/0'") throws {
-        guard let seed = BIP39.seedFromMmemonics(mnemonics) else {
+        guard let seed = BIP39.seedFromMnemonics(mnemonics) else {
             throw AptosError.keyError("Invalid Mnemonics")
         }
         let newSeed = NaclSign.KeyPair.deriveKey(path: path, seed: seed).key

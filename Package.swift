@@ -18,10 +18,9 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(url: "https://github.com/mxcl/PromiseKit.git", from: "8.1.1"),
-        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.4.1"),
         .package(url: "https://github.com/lishuailibertine/tweetnacl-swiftwrap", from: "1.0.5"),
         .package(url: "https://github.com/Flight-School/AnyCodable.git", from: "0.6.1"),
-        .package(url: "https://github.com/mathwallet/BIP39swift", from: "1.0.1")
+        .package(url: "https://github.com/mathwallet/BIP39swift", from: "2.0.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -30,7 +29,6 @@ let package = Package(
             name: "AptosSwift",
             dependencies: [
                 "PromiseKit",
-                "CryptoSwift",
                 "AnyCodable",
                 .product(name: "TweetNacl", package: "tweetnacl-swiftwrap"),
                 "BIP39swift"
